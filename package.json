@@ -1,0 +1,14 @@
+{
+  "name": "primary-school-microfrontend",
+  "version": "1.0.0",
+  "description": "Microfrontend application for primary school education system",
+  "scripts": {
+    "install:all": "bash scripts/install-all.sh",
+    "build:all": "bash scripts/build-all.sh",
+    "start:all": "bash scripts/start-all.sh",
+    "clean": "bash scripts/clean.sh"
+  },
+  "keywords": ["microfrontend", "education", "react"],
+  "author": "",
+  "license": "MIT"
+}
