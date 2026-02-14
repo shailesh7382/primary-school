@@ -28,13 +28,24 @@ This will start all services concurrently:
 - Exam: http://localhost:3002
 - Student Records: http://localhost:3003
 
-### 3. Access the application
+### 3. Check application status
+To verify all services are running correctly:
+```bash
+bash scripts/check-status.sh
+```
+
+This will check:
+- Port availability for all 4 services
+- HTTP responses from each service
+- Module Federation remote entry files
+
+### 4. Access the application
 Open your browser and navigate to:
 ```
 http://localhost:3000
 ```
 
-### 4. Stop all services
+### 5. Stop all services
 Press `Ctrl+C` in the terminal where services are running.
 
 ## Building for Production
@@ -86,6 +97,25 @@ Each module exposes its main component through Webpack Module Federation:
    - View individual student details
 
 ## Troubleshooting
+
+### Application not loading in browser
+If the application loads but shows a blank page or console errors about loading remote modules:
+
+1. **Check all services are running:**
+   ```bash
+   bash scripts/check-status.sh
+   ```
+
+2. **Verify CORS headers:** All webpack configs include CORS headers for Module Federation. If you modified them, ensure the `devServer.headers` section includes:
+   ```javascript
+   headers: {
+     'Access-Control-Allow-Origin': '*',
+   }
+   ```
+
+3. **Clear browser cache:** Hard refresh with Cmd+Shift+R (Mac) or Ctrl+Shift+R (Windows/Linux)
+
+4. **Check browser console:** Open DevTools (F12) and look for any error messages about failed module loading
 
 ### Ports already in use
 If you get port errors, check if the ports are already in use:

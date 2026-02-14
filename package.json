@@ -6,6 +6,8 @@
     "install:all": "bash scripts/install-all.sh",
     "build:all": "bash scripts/build-all.sh",
     "start:all": "bash scripts/start-all.sh",
+    "stop:all": "bash scripts/stop-all.sh",
+    "check-status": "bash scripts/check-status.sh",
     "clean": "bash scripts/clean.sh"
   },
   "keywords": ["microfrontend", "education", "react"],

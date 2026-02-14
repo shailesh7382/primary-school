@@ -74,6 +74,8 @@ primary-school/
 │   ├── install-all.sh        # Install all dependencies
 │   ├── build-all.sh          # Build all modules
 │   ├── start-all.sh          # Start all modules
+│   ├── stop-all.sh           # Stop all running services
+│   ├── check-status.sh       # Check status of all services
 │   └── clean.sh              # Clean all modules
 │
 ├── package.json              # Root package.json
@@ -116,6 +118,30 @@ This will start:
 - Student Records module at http://localhost:3003
 
 **Access the main application at http://localhost:3000**
+
+### Checking Status
+
+Verify all services are running correctly:
+
+```bash
+# Check status of all services
+npm run check-status
+
+# Or use the script directly
+bash scripts/check-status.sh
+```
+
+### Stopping Services
+
+Stop all running services:
+
+```bash
+# Stop all services
+npm run stop:all
+
+# Or use the script directly
+bash scripts/stop-all.sh
+```
 
 ### Building for Production
 
