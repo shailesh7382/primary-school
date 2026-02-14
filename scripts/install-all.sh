@@ -10,52 +10,51 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
 # Install dependencies for Container
 echo -e "${BLUE}Installing Container dependencies...${NC}"
-cd container && npm install
+cd "${ROOT_DIR}/container" && npm install
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}✓ Container dependencies installed${NC}"
 else
     echo "✗ Failed to install Container dependencies"
     exit 1
 fi
-cd ..
 
 # Install dependencies for Maths-Science module
 echo ""
 echo -e "${BLUE}Installing Maths-Science module dependencies...${NC}"
-cd maths-science && npm install
+cd "${ROOT_DIR}/maths-science" && npm install
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}✓ Maths-Science dependencies installed${NC}"
 else
     echo "✗ Failed to install Maths-Science dependencies"
     exit 1
 fi
-cd ..
 
 # Install dependencies for Exam module
 echo ""
 echo -e "${BLUE}Installing Exam module dependencies...${NC}"
-cd exam && npm install
+cd "${ROOT_DIR}/exam" && npm install
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}✓ Exam dependencies installed${NC}"
 else
     echo "✗ Failed to install Exam dependencies"
     exit 1
 fi
-cd ..
 
 # Install dependencies for Student Records module
 echo ""
 echo -e "${BLUE}Installing Student Records module dependencies...${NC}"
-cd student-records && npm install
+cd "${ROOT_DIR}/student-records" && npm install
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}✓ Student Records dependencies installed${NC}"
 else
     echo "✗ Failed to install Student Records dependencies"
     exit 1
 fi
-cd ..
 
 echo ""
 echo "=========================================="

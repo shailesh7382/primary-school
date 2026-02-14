@@ -11,41 +11,40 @@ BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
 echo -e "${YELLOW}Starting all microservices...${NC}"
 echo ""
 
 # Start Maths-Science module in background
 echo -e "${BLUE}Starting Maths-Science module on port 3001...${NC}"
-cd maths-science && npm start &
+cd "${ROOT_DIR}/maths-science" && npm start &
 MATHS_PID=$!
-cd ..
 
 # Wait a bit for the first service to initialize
 sleep 2
 
 # Start Exam module in background
 echo -e "${BLUE}Starting Exam module on port 3002...${NC}"
-cd exam && npm start &
+cd "${ROOT_DIR}/exam" && npm start &
 EXAM_PID=$!
-cd ..
 
 # Wait a bit
 sleep 2
 
 # Start Student Records module in background
 echo -e "${BLUE}Starting Student Records module on port 3003...${NC}"
-cd student-records && npm start &
+cd "${ROOT_DIR}/student-records" && npm start &
 RECORDS_PID=$!
-cd ..
 
 # Wait a bit
 sleep 2
 
 # Start Container (main app)
 echo -e "${BLUE}Starting Container on port 3000...${NC}"
-cd container && npm start &
+cd "${ROOT_DIR}/container" && npm start &
 CONTAINER_PID=$!
-cd ..
 
 echo ""
 echo "=========================================="
