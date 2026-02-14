@@ -1,0 +1,53 @@
+[Unit]
+Description=Primary School Microfrontend Application
+Documentation=https://github.com/your-org/primary-school
+After=network.target
+
+[Service]
+Type=forking
+User=www-data
+WorkingDirectory=/var/www/primary-school
+
+# Environment variables
+Environment="NODE_ENV=production"
+Environment="MATHS_SCIENCE_URL=http://localhost:3001/remoteEntry.js"
+Environment="EXAM_URL=http://localhost:3002/remoteEntry.js"
+Environment="STUDENT_RECORDS_URL=http://localhost:3003/remoteEntry.js"
+
+# Start all services
+ExecStart=/bin/bash -c '\
+  cd /var/www/primary-school/maths-science && npm run serve > /var/log/primary-school/maths-science.log 2>&1 & \
+  sleep 2 && \
+  cd /var/www/primary-school/exam && npm run serve > /var/log/primary-school/exam.log 2>&1 & \
+  sleep 2 && \
+  cd /var/www/primary-school/student-records && npm run serve > /var/log/primary-school/student-records.log 2>&1 & \
+  sleep 2 && \
+  cd /var/www/primary-school/container && npm run serve > /var/log/primary-school/container.log 2>&1 &'
+
+# Stop services
+ExecStop=/bin/bash -c '\
+  pkill -f "node.*serve.*maths-science" || true && \
+  pkill -f "node.*serve.*exam" || true && \
+  pkill -f "node.*serve.*student-records" || true && \
+  pkill -f "node.*serve.*container" || true'
+
+# Restart policy
+Restart=on-failure
+RestartSec=10
+
+# Security
+NoNewPrivileges=true
+PrivateTmp=true
+
+# Resource limits
+LimitNOFILE=65536
+LimitNPROC=65536
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=primary-school
+
+[Install]
+WantedBy=multi-user.target
+
