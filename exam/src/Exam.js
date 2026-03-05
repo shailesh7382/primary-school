@@ -182,6 +182,12 @@ function ExamResult() {
   const totalQuestions = 10;
   const correctAnswers = 8;
   
+  // Sample data for chart
+  const chartData = [
+    { subject: 'Maths', score: 85 },
+    { subject: 'Science', score: 65 }
+  ];
+  
   return (
     <div className="exam-result">
       <div className="result-card">
@@ -207,6 +213,11 @@ function ExamResult() {
             <span>Grade:</span>
             <strong className="grade-badge">B+</strong>
           </div>
+        </div>
+        
+        <div className="chart-container">
+          <h3>Performance by Subject</h3>
+          <ExamChart data={chartData} width={400} height={200} />
         </div>
         
         <div className="result-actions">

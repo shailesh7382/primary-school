@@ -1,0 +1,19 @@
+# ~/.vibe/config.toml
+
+# Set the active model alias
+active_model = "local-llama"
+
+[[providers]]
+name = "openai"
+api_base = "http://127.0.0.1:1234/v1"  # Default local endpoint
+api_key_env_var = ""                  # Not required for local
+api_style = "openai"
+backend = "generic"
+
+[[models]]
+name = "qwen3-next-80b"          # Exact name used by your local server
+provider = "openai"
+alias = "local-llama"
+temperature = 0.2
+input_price = 0.0
+output_price = 0.0
