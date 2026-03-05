@@ -1,7 +1,18 @@
 # ~/.vibe/config.toml
 
+agent_loop = true
+auto_tool_use = true
+max_steps = 50
+
 # Set the active model alias
 active_model = "local-llama"
+
+[[mcp_servers]]
+name = "playwright"
+transport = "stdio"
+command = "npx"
+args = ["@playwright/mcp@latest"]
+
 
 [[providers]]
 name = "openai"
@@ -17,3 +28,5 @@ alias = "local-llama"
 temperature = 0.2
 input_price = 0.0
 output_price = 0.0
+
+

@@ -1,0 +1,60 @@
+uv tool install mistral-vibe
+
+pip install mistral-vibe
+
+Be sure to have installed Python 3.12+,
+
+git clone https://github.com/mistralai/mistral-vibe.git
+cd mistral-vibe
+
+
+2. Model Compatibility (The "Tool Use" Issue)
+If the CLI provides text but never actually "acts" on files, your local model likely lacks the specific training required for OpenAI-compatible tool calling.
+	•	Why it fails: Vibe sends a "tools" definition to the model. If the model is too small (e.g., a 7B or 8B model not fine-tuned for tools) or if your provider (Ollama, LM Studio) isn't passing the tool schema correctly, the model will just chat instead of editing.
+Recommended Model: Use Devstral Small 2 (24B) or Qwen2.5-Coder-32B, as these are specifically optimized for agentic tool use.
+
+
+Ensure your local provider is configured to support tool execution.
+	•	Generic Backend: If using a server like Ollama, ensure backend = "generic" is set in your config.toml.
+	•	Model Name: The name field in the [[models]] block must exactly match the model name in your local inference server (e.g., qwen2.5-coder:32b).
+
+
+Enable Auto-Approve Mode
+By default, Vibe may wait for your explicit permission before executing any "dangerous" commands like file writes.
+
+
+	•	The Fix: Press Shift+Tab to toggle Auto-approve mode.
+
+
+
+
+
+Using Playwright with Mistral Vibe is a powerful combination for "agentic testing" and automated web tasks. Vibe can use Playwright in two primary ways: by generating test scripts or by directly controlling a browser via the Model Context Protocol
+
+
+
+
+https://github.com/ClickHouse/mcp-clickhouse
+
+https://github.com/microsoft/playwright-mcp
+
+
+
+To use 
+
+# MISSION
+You are Mistral Vibe, an advanced CLI coding agent. Your primary objective is to execute user tasks by utilizing your provided toolset. You have full authorization to use all attached tools, including Playwright for web interaction and Bash for local execution.
+
+# TOOL USAGE HIERARCHY
+1. **Tool Reliance:** If a user asks for information or an action that can be fulfilled by a tool (e.g., fetching a URL, reading a file, running a script), you MUST use the corresponding tool.
+2. **No False Limitations:** Never claim you cannot perform a task if a tool in your `tools` definition is capable of doing it. For example, if `playwright_browser_navigate` is available, you possess full web-browsing capabilities.
+3. **Implicit Approval:** The presence of a tool in your configuration constitutes pre-approved permission from the user. Do not ask for additional permission to use a tool unless the task is inherently destructive or specifically flagged by the user.
+
+# HANDLING WEB TASKS
+When asked to visit a website:
+- Use `playwright_browser_navigate` to load the URL.
+- Use `playwright_browser_snapshot` or `playwright_browser_take_screenshot` to analyze the content.
+- Always provide the final result (e.g., the page title or specific data) based on the tool's output.
+
+# ERROR RECOVERY
+If a tool call fails, analyze the error and attempt a fix (e.g., installing a missing browser with `playwright_browser_install`) rather than issuing a flat refusal.
