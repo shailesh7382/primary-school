@@ -8,6 +8,7 @@ enabled_tools = ["*"]
 disabled_tools = []
 enabled_skills = ["*"]
 disabled_skills = []
+skill_paths = [".vibe/skills"]
 
 # Set the active model alias
 active_model = "local-llama"
@@ -279,42 +280,49 @@ name = "playwright"
 transport = "stdio"
 command = "npx"
 args = ["@playwright/mcp@latest"]
+sampling_enabled = true
 
 [[mcp_servers]]
 name = "filesystem"
 transport = "stdio"
 command = "uvx"
 args = ["mcp-server-filesystem", "/Users/shailesh/codebase-new/primary-school"]
+sampling_enabled = true
 
 [[mcp_servers]]
 name = "fetch"
 transport = "stdio"
 command = "uvx"
 args = ["mcp-server-fetch"]
+sampling_enabled = true
 
 [[mcp_servers]]
 name = "git"
 transport = "stdio"
 command = "uvx"
 args = ["mcp-server-git", "--repository", "/Users/shailesh/codebase-new/primary-school"]
+sampling_enabled = true
 
 [[mcp_servers]]
 name = "memory"
 transport = "stdio"
 command = "uvx"
 args = ["mcp-server-memory"]
+sampling_enabled = true
 
 [[mcp_servers]]
 name = "time"
 transport = "stdio"
 command = "uvx"
 args = ["mcp-server-time"]
+sampling_enabled = true
 
 [[mcp_servers]]
 name = "sequential-thinking"
 transport = "stdio"
 command = "npx"
 args = ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+sampling_enabled = true
 
 # Data tool for analytics/query workflows.
 [[mcp_servers]]
@@ -323,6 +331,7 @@ transport = "stdio"
 command = "npx"
 args = ["@clickhouse/mcp-clickhouse"]
 env = { CLICKHOUSE_HOST = "127.0.0.1", CLICKHOUSE_PORT = "8123", CLICKHOUSE_USER = "default", CLICKHOUSE_PASSWORD = "dummy_password", CLICKHOUSE_DATABASE = "default", CLICKHOUSE_SECURE = "false" }
+sampling_enabled = true
 
 
 
