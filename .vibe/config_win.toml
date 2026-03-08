@@ -4,6 +4,7 @@
 active_model = "local-llama"
 auto_approve = true
 api_timeout = 900.0
+disable_welcome_banner_animation = true
 
 # Keep all tools/skills enabled unless you explicitly lock them down.
 enabled_tools = ["*"]
@@ -42,7 +43,6 @@ allowlist = [
   "whoami"
 ]
 denylist = [
-  "cmd /k",
   "powershell -NoExit",
   "pwsh -NoExit",
   "diskpart",
@@ -52,7 +52,7 @@ denylist = [
   "rmdir /s",
   "del /f /s /q"
 ]
-denylist_standalone = ["cmd", "powershell", "pwsh", "notepad"]
+denylist_standalone = ["powershell", "pwsh"]
 
 [tools.read_file]
 permission = "always"
@@ -204,6 +204,15 @@ command = "cmd"
 args = ["/c", "npx", "-y", "@playwright/mcp@latest"]
 startup_timeout_sec = 30.0
 tool_timeout_sec = 120.0
+
+[[mcp_servers]]
+name = "windows-mcp"
+transport = "stdio"
+command = "cmd"
+args = ["/c", "uvx", "windows-mcp"]
+startup_timeout_sec = 30.0
+tool_timeout_sec = 120.0
+env = { ANONYMIZED_TELEMETRY = "false" }
 
 [[mcp_servers]]
 name = "filesystem"

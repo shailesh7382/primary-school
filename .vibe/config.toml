@@ -2,6 +2,7 @@
 
 agent_loop = true
 auto_tool_use = true
+disable_welcome_banner_animation = true
 max_steps = 150
 enabled_tools = ["*"]
 disabled_tools = []
@@ -14,6 +15,8 @@ active_model = "local-llama"
 # Global tool permissions for high-autonomy sessions
 [tools.bash]
 permission = "always"
+#default_timeout = 300
+
 
 [tools.read_file]
 permission = "always"
