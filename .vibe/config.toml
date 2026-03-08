@@ -279,7 +279,7 @@ permission = "always"
 name = "playwright"
 transport = "stdio"
 command = "npx"
-args = ["@playwright/mcp@latest"]
+args = ["-y", "@playwright/mcp@latest", "--extension"]
 sampling_enabled = true
 
 [[mcp_servers]]

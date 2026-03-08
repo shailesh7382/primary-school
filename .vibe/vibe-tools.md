@@ -57,6 +57,19 @@ sampling_enabled = false
 - Check debug logs during an MCP tool call.
 - Look for sampling-related activity (for example `sampling/createMessage`).
 
+## Playwright Existing Chrome Mode
+
+`playwright` is configured in extension mode:
+- `@playwright/mcp --extension`
+
+Behavior:
+- Reuses already open Chrome windows/tabs through the Playwright MCP Bridge extension.
+- Opens/uses tabs in that existing browser session instead of launching a separate browser process.
+
+Requirements:
+- Install Playwright MCP Bridge Chrome extension.
+- Keep Chrome running with the extension enabled before starting Vibe actions.
+
 ## SSH MCP (Unix + Windows)
 
 `ssh-remote` is configured with `@aiondadotcom/mcp-ssh` in:
