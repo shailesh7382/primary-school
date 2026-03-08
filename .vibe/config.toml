@@ -333,6 +333,28 @@ args = ["@clickhouse/mcp-clickhouse"]
 env = { CLICKHOUSE_HOST = "127.0.0.1", CLICKHOUSE_PORT = "8123", CLICKHOUSE_USER = "default", CLICKHOUSE_PASSWORD = "dummy_password", CLICKHOUSE_DATABASE = "default", CLICKHOUSE_SECURE = "false" }
 sampling_enabled = true
 
+# SharePoint support via Microsoft 365 Graph tools.
+# Note: --org-mode is required to expose SharePoint site/list/drive tools.
+[[mcp_servers]]
+name = "ms365-sharepoint"
+transport = "stdio"
+command = "npx"
+args = ["-y", "@softeria/ms-365-mcp-server", "--org-mode"]
+startup_timeout_sec = 45.0
+tool_timeout_sec = 180.0
+env = { MS365_MCP_ORG_MODE = "true", MS365_MCP_TENANT_ID = "common", MS365_MCP_CLOUD_TYPE = "global", LOG_LEVEL = "info" }
+sampling_enabled = true
+
+# Unix SSH remoting via native ssh/scp and ~/.ssh/config discovery.
+[[mcp_servers]]
+name = "ssh-remote"
+transport = "stdio"
+command = "npx"
+args = ["-y", "@aiondadotcom/mcp-ssh"]
+startup_timeout_sec = 30.0
+tool_timeout_sec = 180.0
+sampling_enabled = true
+
 
 
 [[providers]]

@@ -26,6 +26,8 @@ Configured MCP servers:
 - `time`
 - `sequential-thinking`
 - `clickhouse`
+- `ms365-sharepoint`
+- `ssh-remote` (configured for Unix + Windows)
 - `windows-mcp` (Windows config only)
 
 ## What Changes In Practice
@@ -52,6 +54,22 @@ sampling_enabled = false
 - Restart Vibe after config changes.
 - Check debug logs during an MCP tool call.
 - Look for sampling-related activity (for example `sampling/createMessage`).
+
+## SSH MCP (Unix + Windows)
+
+`ssh-remote` is configured with `@aiondadotcom/mcp-ssh` in:
+- `.vibe/config.toml`
+- `.vibe/config_win.toml`
+
+Prerequisites:
+- `ssh` available on PATH.
+- Target hosts reachable from your machine.
+- SSH auth working first from terminal (key or agent).
+
+Recommended validation:
+1. Restart Vibe CLI.
+2. Ask Vibe to list known hosts from your SSH config.
+3. Ask Vibe to run a simple remote command like `hostname` on one host.
 
 ## Task Tool Templates
 
@@ -118,3 +136,28 @@ Recommended first command after invoking:
 ```bash
 bash .vibe/skills/primary-school-advanced-delivery/scripts/context_scan.sh .
 ```
+
+
+
+## Sharepoint MCP 
+
+With your current ms365-sharepoint setup (@softeria/ms-365-mcp-server --org-mode), Vibe can call these SharePoint MCP tool commands:
+
+search-sharepoint-sites
+get-sharepoint-site
+get-sharepoint-site-by-path
+list-sharepoint-site-drives
+get-sharepoint-site-drive-by-id
+list-sharepoint-site-items
+get-sharepoint-site-item
+list-sharepoint-site-lists
+get-sharepoint-site-list
+list-sharepoint-site-list-items
+get-sharepoint-site-list-item
+get-sharepoint-sites-delta
+Because you enabled --org-mode, it also exposes org tools like:
+
+Teams/Chat tools (list-chats, list-team-channels, send-channel-message, etc.)
+Shared mailbox tools (list-shared-mailbox-messages, send-shared-mailbox-mail)
+User lookup (list-users)
+Plus personal M365 tools (mail, calendar, OneDrive, Excel, OneNote, To Do, contacts, search)

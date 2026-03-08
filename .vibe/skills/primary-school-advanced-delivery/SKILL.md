@@ -41,15 +41,6 @@ metadata:
 - Prefer dedicated tools first: `read_file`, `grep`, MCP `git` and `filesystem`.
 - Delegate broad exploration via `task` (agent: `explore`) when scope is unknown, multiple modules need mapping, or there are competing root-cause hypotheses.
 
-Example `task` payload:
-
-```json
-{
-  "agent": "explore",
-  "task": "Trace login/session behavior across container and all remotes. Return ranked root-cause hypotheses with file:line evidence and impacted routes."
-}
-```
-
 ### 3) Plan Before Edit
 
 - Produce file-level plan first.
