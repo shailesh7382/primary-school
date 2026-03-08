@@ -355,6 +355,27 @@ startup_timeout_sec = 30.0
 tool_timeout_sec = 180.0
 sampling_enabled = true
 
+# React UI generation and component workflows.
+[[mcp_servers]]
+name = "react-magic"
+transport = "stdio"
+command = "npx"
+args = ["-y", "@21st-dev/magic@latest"]
+startup_timeout_sec = 45.0
+tool_timeout_sec = 180.0
+env = { API_KEY = "your_21st_dev_api_key" }
+sampling_enabled = true
+
+# AsciiDoc MCP for docs authoring, analysis, and publishing workflows.
+[[mcp_servers]]
+name = "asciidoc-dacli"
+transport = "stdio"
+command = "uvx"
+args = ["dacli-mcp", "--docs-root", "/Users/shailesh/codebase-new/primary-school"]
+startup_timeout_sec = 30.0
+tool_timeout_sec = 180.0
+sampling_enabled = true
+
 
 
 [[providers]]

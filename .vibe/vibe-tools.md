@@ -28,6 +28,8 @@ Configured MCP servers:
 - `clickhouse`
 - `ms365-sharepoint`
 - `ssh-remote` (configured for Unix + Windows)
+- `react-magic` (React component generation)
+- `asciidoc-dacli` (AsciiDoc docs workflows)
 - `windows-mcp` (Windows config only)
 
 ## What Changes In Practice
@@ -70,6 +72,35 @@ Recommended validation:
 1. Restart Vibe CLI.
 2. Ask Vibe to list known hosts from your SSH config.
 3. Ask Vibe to run a simple remote command like `hostname` on one host.
+
+## React MCP
+
+`react-magic` is configured with `@21st-dev/magic@latest` in:
+- `.vibe/config.toml`
+- `.vibe/config_win.toml`
+
+Setup:
+- Replace `API_KEY` placeholder in both config files with your 21st.dev key.
+- Restart Vibe CLI.
+
+Usage examples:
+1. Ask Vibe to generate a React component from a UI intent.
+2. Ask Vibe to refine an existing component for responsiveness and accessibility.
+
+## AsciiDoc MCP
+
+`asciidoc-dacli` is configured with `dacli-mcp` in:
+- `.vibe/config.toml`
+- `.vibe/config_win.toml`
+
+Notes:
+- Current `--docs-root` points at this repository root.
+- If your AsciiDoc lives in a subfolder, change `--docs-root` to that path.
+
+Recommended validation:
+1. Restart Vibe CLI.
+2. Ask Vibe to list available AsciiDoc MCP tools.
+3. Run a simple AsciiDoc operation against a file in your docs root.
 
 ## Task Tool Templates
 
@@ -161,3 +192,23 @@ Teams/Chat tools (list-chats, list-team-channels, send-channel-message, etc.)
 Shared mailbox tools (list-shared-mailbox-messages, send-shared-mailbox-mail)
 User lookup (list-users)
 Plus personal M365 tools (mail, calendar, OneDrive, Excel, OneNote, To Do, contacts, search)
+
+For @aiondadotcom/mcp-ssh, the core MCP tool commands are:
+
+listKnownHosts()
+getHostInfo(hostAlias)
+checkConnectivity(hostAlias)
+runRemoteCommand(hostAlias, command)
+runCommandBatch(hostAlias, commands)
+uploadFile(hostAlias, localPath, remotePath)
+downloadFile(hostAlias, remotePath, localPath)
+Server startup command (if run manually):
+
+Unix/macOS: npx -y @aiondadotcom/mcp-ssh
+Windows: cmd /c npx -y @aiondadotcom/mcp-ssh
+Quick Vibe prompt examples:
+
+“List all SSH hosts.”
+“Check connectivity to prod-web.”
+“Run hostname && uptime on prod-web.”
+“Upload ./build/app.tar.gz to /tmp/app.tar.gz on prod-web.”
